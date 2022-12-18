@@ -1,16 +1,18 @@
-const fsPromise = require("fs/promises");
+const utilities = require("./utilities");
 
-async function readTextInput(question) {
+async function solveDayOneQuestion(question) {
     try {
-        const calarieData = await fsPromise.readFile("day1_input.txt", { encoding: "utf8" });
+        const calarieData = await utilities.readTextInput("inputs/day1_input.txt");
+        
+        if (calarieData.length < 1) {
+            console.error("Error: was not able to parse the input file");
+        }
 
         if (question === 1) {
             parseTextInputForQuestion1(calarieData);
         } else if (question === 2) {
             parseTextInputForQuestion2(calarieData);
         }
-
-
     }
     catch (err) {
         console.error(err);
@@ -86,4 +88,5 @@ function parseTextInputForQuestion2(calarieData) {
     console.log(`The top three calarie count is ${topThreeSum} calaries.`);
 }
 
-readTextInput(2);
+solveDayOneQuestion(1);
+solveDayOneQuestion(2);
